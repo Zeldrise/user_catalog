@@ -1,0 +1,79 @@
+<!-- tampilkan loading... -->
+<div *ngIf="loading" class="spinner-border"><span class="sr-only"></span></div>
+<div class="container" *ngIf="page">
+  <h5 class="text-center">All Customers</h5>
+  <!-- form input untuk pencarian data -->
+  <div class="form-control d-flex flex-column" *ngIf="!loading">
+    <input 
+      class="data mx-auto"
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Enter name to search"
+    />
+    <!-- jika klik tombol search, panggil fungsi searchByName yg ada di users.component.ts -->
+    <button class="btn mt-3 btn-style mx-auto" (click)="searchByName()">Search</button>
+  </div>
+
+  <!-- dapatkan data hasil pencarian di searchResponse dan masukkan satu per satu ke data -->
+  <table class="mx-auto">
+    <!-- tampilkan hasil pencarian dalam bentuk link  -->
+    <tbody>
+      <tr *ngFor="let item of searchResponse">
+        <td class="p-3">
+          {{ item.customer_name }}
+        </td>
+        <td><a class="btn btn-style1" [routerLink]="['/user/', item.id]">view</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- tampilkan data customer dalam tabel -->
+ <!-- <div *ngIf="loading" class="spinner-border"><span class="sr-only"></span></div> -->
+  <div *ngIf="!loading">
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>Customer ID</th>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let respons of response">
+          <td>{{ respons.id }}</td>
+          <td>{{ respons.customer_name }}</td>
+          <td>{{ respons.phone_number }}</td>
+          <td>
+            <a class="btn btn-style1" [routerLink]="['/user/', respons.id]"
+              >view</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Pagination -->
+<div class="container">
+  <div class="row mx-auto">
+    <div class="col-6">
+      <a [routerLink]="['/users/', prevPage, limit]" class="btn btn-style my-auto"
+        >Prev</a
+      >
+      <span class="p-3 fw-bold">{{ page }}</span>
+      <a [routerLink]="['/users/', nextPage, limit]" class="btn btn-style my-auto"
+        >Next</a
+      >
+    </div>
+    <div class="col-6">
+      <div class="form-control d-flex" *ngIf="!loading">
+    <input type="number" [(ngModel)]="limitData" placeholder="Limit data" min="1"/>
+    <!-- jika klik tombol search, panggil fungsi searchByName yg ada di users.component.ts -->
+    <button class="btn ms-3 btn-style" (click)="applyLimit()">Apply</button>
+  </div>
+    </div>
+  </div>
+</div>
+</div>
+
+

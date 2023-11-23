@@ -1,0 +1,20 @@
+<!-- tampilkan data dalam format card bootstrap -->
+<div *ngIf="loading" class="spinner-border"><span class="sr-only"></span></div>
+<div *ngFor="let respons of data" class="container">
+  <h5 class="text-center">Details for customer #{{ respons.id }}</h5>
+  <div *ngFor="let respons of data" class="card mx-auto" style="width: 22rem">
+  <div class="card-body d-flex flex-column mx-auto">
+    <h3 class="card-title text-center">{{ respons.customer_name }}</h3>
+    <img src="https://i.pinimg.com/564x/18/b5/b5/18b5b599bb873285bd4def283c0d3c09.jpg" class="card-img-top mx-auto" alt="...">
+    <p class="card-text my-auto mt-3 mx-auto">Email: {{ respons.email }}</p>
+    <p class="card-text my-auto mx-auto">Address: {{ respons.address }}</p>
+    <p class="card-text mx-auto">Phone: {{ respons.phone_number }}</p>
+    <button class="btn btn-style mx-auto">
+  <a class="link" [routerLink]="['/users/', 1, 10]">Back to all customers</a>
+</button>
+  </div>
+</div>
+</div>
+
+
+
